@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>価格比較</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+	<table class="table">
+		<tr class="hidden">
+			<th>0</th>
+			<td><input type="text" class="form-control" /></td>
+			<td><input type="text" class="form-control" /></td>
+			<td><span></span></td>
+		</tr>
+	</table>
+	
+	<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script>
+	$(function(){
+		$(".btn").on("click", function(){
+			add();
+		}).click();
+		$("input[type=text]").on("change", function(){
+			var $tr = $(this).closest("tr");
+			var a = $("input[type=text]", $tr).get(0).value;
+			var b = $("input[type=text]", $tr).get(1).value;
+			var c = a / b;
+			$("span", $tr).text(c);
+		});
+	});
+	function add() {
+		var $tr = $(".table tr:first-child").clone(true);
+		$("th", $tr).text($(".table tr").length);
+		$tr.hide().removeClass("hidden");
+		$(".table").append($tr);
+		$tr.slideDown("slow");
+	}
+	</script>
+</body>
+</html>
